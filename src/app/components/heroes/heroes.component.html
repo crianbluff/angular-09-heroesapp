@@ -1,0 +1,65 @@
+<h1>
+  Heroes
+</h1>
+
+<hr>
+
+<div class="row">
+  <div class="col-md-12 text-right">
+    <button type="button" class="btn btn-outline-primary puntero" [routerLink]="[ '/heroe', 'nuevo' ]">
+      Nuevo héroe
+    </button>
+  </div>
+</div>
+
+<br>
+
+<div class="row animated fadein fast">
+  <div class="col-md-12">
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead class="thead-inverse">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Casa</th>
+            <th scope="col" class="text-right">Opciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let k of heroes | keys; let i = index">
+            <td> {{ i + 1 }} </td>
+            <td> {{ heroes[k].nombre }} </td>
+            <td> {{ heroes[k].casa }} </td>
+            <td class="text-right w250">
+              <button type="button" class="btn btn-outline-success puntero" [routerLink]="[ '/heroe', k ]">
+                Editar
+              </button>
+
+              <button type="button" class="btn btn-outline-danger puntero" (click)="borraHeroe(k)">
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="alert alert-info" role="alert" *ngIf="(heroes | keys).length === 0 && !loading">
+        <strong>
+          No hay
+        </strong>
+        registros que mostrar
+      </div>
+
+      <div class="alert alert-warning" role="alert" *ngIf="loading">
+        <strong>
+          Cargando...
+        </strong>
+        por favor espere
+      </div>
+
+    </div>
+  </div>
+</div>
